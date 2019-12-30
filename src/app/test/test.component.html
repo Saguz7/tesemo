@@ -1,107 +1,101 @@
-<div>
-<br>
-<div class="row" *ngIf="quitarpararesultados">
-  <div class="col s5 offset-s1">
-    <label class="nombre-usuario" id="cambiodetamanio2">
-    Examen aplicado a {{persona.nombre}} {{persona.primer_apellido}} {{persona.segundo_apellido}}
-    </label>
+<div><br>
+  <div class="row" *ngIf="quitarpararesultados">
+    <div class="col s5 offset-s1">
+      <label class="nombre-usuario" id="cambiodetamanio2">
+        Examen aplicado a {{persona.nombre}} {{persona.primer_apellido}} {{persona.segundo_apellido}}
+      </label>
     </div>
     <div class="col s2" id="cambiodetamanio2">
       <div class=row>
-      <a *ngIf="!mostrartest" class="waves-effect waves-light btn" (click)="empezarexamen()" > Empezar</a>
+        <a *ngIf="!mostrartest" class="waves-effect waves-light btn" (click)="empezarexamen()" > Empezar</a>
       </div>
     </div>
     <div class="col s2" id="cambiodetamanio2">
       <span class="flow-text">
-          <div id="cronometro-numeros">
-             <i class="material-icons" id="crono-icon">access_time</i> {{minutos2}} : {{segundos2}}
-          </div>
+        <div id="cronometro-numeros">
+          <i class="material-icons" id="crono-icon">access_time</i> {{minutos2}} : {{segundos2}}
+        </div>
       </span>
-
     </div>
-</div>
-<div *ngIf="mostrartest">
-<div *ngIf="quitarpararesultados" class="container">
-   <div class="card">
-
-      <div class="row">
-          <div class="centrar">
-             <br>
-                  <p class="tituloexamen">{{configuracionExamen.descripcion}} </p>
+  </div>
+  <div *ngIf="mostrartest">
+    <div *ngIf="quitarpararesultados" class="container">
+      <div class="card">
+        <div class="row">
+          <div class="centrar"><br>
+            <p class="tituloexamen">{{configuracionExamen.descripcion}} </p>
           </div>
           <div class="col s10">
-               <div class="row">
-               </div>
-          <div class="container">
-                <div class="row">
-                      <p class="descripcionpregunta">
-                        <i class="material-icons">dashboard</i> {{preguntaobjamostrar.descripcion}}
-                      </p>
-                      <img class="responsive-img" src={{preguntaobjamostrar.ruta}}>
-                 </div>
-                 <div class="row">
-                      <div  *ngFor="let respuesta of respuestasobjamostrar; let i = index" >
-                            <label *ngIf="mostrarcorrectas==false" >
-                                       <input *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada==i"  name="group2" type="radio" (click)="asignarrespuestaalobjelegida(respuesta.id_pregunta,i)" checked />
-                                       <span  *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada==i"><label class="respuestas">{{respuesta.descripcion}}  </label></span>
-                                       <input *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada!=i"  name="group2" type="radio" (click)="asignarrespuestaalobjelegida(respuesta.id_pregunta,i)" />
-                                       <span *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada!=i"><label class="respuestas">{{respuesta.descripcion}}</label></span>
-                             </label>
-                        </div>
-                  <div *ngIf="mostrarcorrectas==true">
-                          <div *ngFor="let correctas of respuestasobjamostrar; let i = index">
-                                <label>
-                                      <span *ngIf="correctas.correcto==true" class="blue-text text-darken-2"><label class="respuestas">{{correctas.descripcion}}</label></span>   <i *ngIf="correctas.correcto==true" class="material-icons">check</i>
-                                      <span *ngIf="correctas.correcto!=true" class="red-text text-darken-2"><label class="respuestas">{{correctas.descripcion}}</label></span>   <i *ngIf="correctas.correcto!=true" class="material-icons">clear</i>
-                                      <br>
-                                 </label>
-                           </div>
-                   </div> <br> <br>
-                   <div class="centrar">
-                          <div class="row" id="botonguardar">
-                                 <a *ngIf="mostrarbotonsiguiente==false && mostrarresultadosboton!=true" class="waves-effect waves-light btn" (click)="cambiarpreguntamostrada(puntero)">   Guardar  </a>
-                                 <a *ngIf="mostrarbotonsiguiente!=false && mostrarresultadosboton!=true" class="waves-effect waves-light btn" (click)="botonsiguiente(puntero)">Siguiente  </a>
-                                 <a *ngIf="mostrarresultadosboton" class="waves-effect waves-light btn" (click)="guardarresultadosycalcular()" >Ver Resultados</a>
-                           </div>
-                    </div>
+            <div class="row">
+            </div>
+            <div class="container">
+              <div class="row">
+                <p class="descripcionpregunta">
+                  <i class="material-icons">dashboard</i> {{preguntaobjamostrar.descripcion}}
+                </p>
+                <img class="responsive-img" src={{preguntaobjamostrar.ruta}}>
               </div>
-        </div>
-           <div class="centrar">
-               <div class="row">
-                   <ul class="pagination">
-                          <li *ngFor="let item of preguntas; let i = index" class="waves-effect">
-                              <a  *ngIf="preguntaobjamostrar.respuestas[0].id_pregunta==(i+1)" class="#ffcdd2 red lighten-4"  ><label class="paginacion">{{i+ 1}} </label></a>
-                              <a *ngIf="preguntaobjamostrar.respuestas[0].id_pregunta!=(i+1)" ><label class="paginacion">{{i+ 1}}  </label></a>
-                          </li>
-                   </ul>
-               </div>
+              <div class="row">
+                <div  *ngFor="let respuesta of respuestasobjamostrar; let i = index" >
+                  <label *ngIf="mostrarcorrectas==false" >
+                    <input *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada==i"  name="group2" type="radio" (click)="asignarrespuestaalobjelegida(respuesta.id_pregunta,i)" checked />
+                    <span  *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada==i"><label class="respuestas">{{respuesta.descripcion}}  </label></span>
+                    <input *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada!=i"  name="group2" type="radio" (click)="asignarrespuestaalobjelegida(respuesta.id_pregunta,i)" />
+                    <span *ngIf="examenContestadoalmomento[respuesta.id_pregunta-1].id_respuestaasignada!=i"><label class="respuestas">{{respuesta.descripcion}}</label></span>
+                  </label>
+                </div>
+                <div *ngIf="mostrarcorrectas==true">
+                  <div *ngFor="let correctas of respuestasobjamostrar; let i = index">
+                    <label>
+                      <span *ngIf="correctas.correcto==true" class="blue-text text-darken-2"><label class="respuestas">{{correctas.descripcion}}</label></span>   <i *ngIf="correctas.correcto==true" class="material-icons">check</i>
+                      <span *ngIf="correctas.correcto!=true" class="red-text text-darken-2"><label class="respuestas">{{correctas.descripcion}}</label></span>   <i *ngIf="correctas.correcto!=true" class="material-icons">clear</i><br>
+                    </label>
+                  </div>
+                </div> <br> <br>
+                <div class="centrar">
+                  <div class="row" id="botonguardar">
+                    <a *ngIf="mostrarbotonsiguiente==false && mostrarresultadosboton!=true" class="waves-effect waves-light btn" (click)="cambiarpreguntamostrada(puntero)">   Guardar  </a>
+                    <a *ngIf="mostrarbotonsiguiente!=false && mostrarresultadosboton!=true" class="waves-effect waves-light btn" (click)="botonsiguiente(puntero)">Siguiente  </a>
+                    <a *ngIf="mostrarresultadosboton" class="waves-effect waves-light btn" (click)="guardarresultadosycalcular()" >Ver Resultados</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="centrar">
+              <div class="row">
+                <ul class="pagination">
+                  <li *ngFor="let item of preguntas; let i = index" class="waves-effect">
+                    <a  *ngIf="preguntaobjamostrar.respuestas[0].id_pregunta==(i+1)" class="#ffcdd2 red lighten-4"  ><label class="paginacion">{{i+ 1}} </label></a>
+                    <a *ngIf="preguntaobjamostrar.respuestas[0].id_pregunta!=(i+1)" ><label class="paginacion">{{i+ 1}}  </label></a>
+                  </li>
+                </ul>
+              </div>
             </div><br>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-<div *ngIf="!quitarpararesultados"  class="container">
-     <div class="card"> <br> <br>
-         <div class="row">
-             <div *ngIf="siaprobo">
-                 <div class="row">
-                     <div class="centrar">
-                           <h5> {{mensaje}} </h5>
-                           <a class="waves-effect waves-light btn"  > Descargar como pdf</a><br><br>
-                     </div>
-                  </div>
-              </div>
-
-    <div *ngIf="!siaprobo">
-        <div class="row">
+  <div *ngIf="!quitarpararesultados"  class="container">
+    <div class="card"> <br> <br>
+      <div class="row">
+        <div *ngIf="siaprobo">
+          <div class="row">
             <div class="centrar">
-                 <h5> {{mensaje}} </h5>
-                      <label>Favor de hacer otra cita el dia (Aqui vendra el dia tentativo).</label><br><br>
+              <h5> {{mensaje}} </h5>
+              <a class="waves-effect waves-light btn"  > Descargar como pdf</a><br><br>
             </div>
+          </div>
         </div>
-       </div>
+        <div *ngIf="!siaprobo">
+          <div class="row">
+            <div class="centrar">
+              <h5> {{mensaje}} </h5>
+              <label>Favor de hacer otra cita el dia (Aqui vendra el dia tentativo).</label><br><br>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
- </div>
 </div>
