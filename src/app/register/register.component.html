@@ -1,101 +1,150 @@
+<div class="container">
+  <div class="carousel carousel-slider center " data-indicators="true">
+    <div class="carousel-fixed-item center middle-indicator">
+     <div class="left">
+      <a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+     </div>
+
+     <div class="right">
+     <a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+     </div>
+    </div>
+    <div class="carousel-item red white-text" href="#one!">
+      <h2>First Panel</h2>
+      <p class="white-text">This is your first panel</p>
+    </div>
+    <div class="carousel-item amber white-text" href="#two!">
+      <h2>Second Panel</h2>
+      <p class="white-text">This is your second panel</p>
+    </div>
+    <div class="carousel-item green white-text" href="#three!">
+      <h2>Third Panel</h2>
+      <p class="white-text">This is your third panel</p>
+    </div>
+    <div class="carousel-item blue white-text" href="#four!">
+      <h2>Fourth Panel</h2>
+      <p class="white-text">This is your fourth panel</p>
+    </div>
+  </div>
+
+</div>
+
+
 <div class="container"><br>
-     <ul class="collapsible">
-      <li>
-        <div class="collapsible-header valign-wrapper" id="divheader1"><i class="material-icons">account_circle</i>Introduce tus datos.</div>
-            <div class="row" *ngIf="mostrarexamenes == false">
-                 <div class="row">
-                   <div class="col s12">
-                     <div class="col s8" id="cambiodetamanio">
-                       <form class="form" role="form" *ngIf="!mostrarexamenes"><br>
-                         <div class="input-field col s12">
-                           <input placeholder="" maxlength="18" id="curp" name="curp" type="text" class="form-control" [(ngModel)]="persona.curp" (change)="verificarCURP()" style="text-transform:uppercase;">
-                           <label class="atributoscuestionario" for="curp">CURP (*)</label>
-                           <span *ngIf="advertenciaCURP" class="helper-text" data-error="wrong" data-success="right">Favor de introducir una CURP Correcta</span>
-                         </div>
-                         <div class="input-field col s12">
-                           <input placeholder="" id="nombre" name="nombre" type="text" class="form-control" [(ngModel)]="persona.nombre">
-                           <label class="atributoscuestionario" for="nombre">Nombre completo (*)</label>
-                         </div>
-                         <div class="input-field col s12">
-                           <input placeholder="" id="apellidopaterno" name="apellidopaterno" type="text" class="form-control" [(ngModel)]="persona.primer_apellido">
-                           <label class="atributoscuestionario" for="apellidopaterno">Primer Apellido (*)</label>
-                         </div>
-                         <div class="input-field col s12">
-                           <input placeholder="" id="apellidomaterno" name="apellidomaterno" type="text" class="form-control" [(ngModel)]="persona.segundo_apellido">
-                           <label class="atributoscuestionario" for="apellidomaterno">Segundo Apellido </label>
-                         </div>
-                       </form>
-                     </div>
-                     <div class="col s4" *ngIf="!mostrarexamenes" id="cambiodetamanio2">
-                       <div id="app">
-                         <label class="atributoscuestionario">Foto.</label> <br>
-                         <div><br>
-                           <video class="responsive-video" #video id="video" width="320" height="240" autoplay></video>
-                         </div>
-                         <div>
-                           <a class="red lighten-2 btn" id="snap" (click)="capture()">Tomar foto</a>
-                         </div>
-                         <canvas #canvas id="canvas" width="640" height="480"></canvas>
-                         <ul>
-                           <li>
-                             <img src="{{ this.captures[0] }}" height="100" />
-                           </li>
-                         </ul>
-                       </div>
-                     </div>
-                     <div class="input-field col s10 offset s2" *ngIf="mostrartBtnSelTest">
-                       <a class="waves-effect waves-light btn" (click)="beforemostrarexamenes()">Continuar con la seleccion de examen</a>
-                     </div>
-                   </div>
-                 </div>
-                 <div>
-                   <ul>
-                     <li *ngFor="let imagen of imagenes | async">
-                       {{imagen.nombre}}
-                     </li>
-                   </ul>
-                 </div>
-               </div>
-             </li>
-             <li>
-               <div class="collapsible-header valign-wrapper" id="divheader2"><i class="material-icons">format_list_bulleted</i> Selecciona el tipo de examen.</div>
-               <div class="row" *ngIf="mostrarexamenes && mostrartest == false">
-                 <div class="row">
-                   <div class="col s12"><br>
-                     <div class="row">
-                       <div class="col s8 offset-s1">
-                         <div  *ngFor="let minionexamen of examenes; let i = index" >
-                           <label>
-                             <input name="group2" type="radio" (click)="seleccionarExamen(minionexamen)" />
-                             <span>
-                               <label>{{minionexamen.nombre}} </label>
-                               <label>(
-                               </label>
-                               <label *ngFor="let licencia of minionexamen.tipos_licencia; let x = index" class="categorias-enunciado">
-                                 {{licencia.nombre}} <label class="categorias-enunciado" *ngIf="x != (minionexamen.tipos_licencia.length-1)"> -</label>
-                               </label>
-                               <label>)
-                               </label>
-                             </span>
-                           </label>
-                         </div>
-                       </div>
-                     </div>
-                     <div class="row" *ngIf="mostrarexamenes && mostrarbotonrealizarexamen"><br>
-                       <div class="center">
-                         <label class="advertencia">RECUERDE QUE SOLO TIENE {{this.configuracionExamen.tiempo_limite}} MINUTOS PARA HACER EL EXAMEN, LAS PREGUNTAS SERAN CONTESTADAS DE FORMA CONTINUA ASI QUE NO PODRA REGRESAR A UNA PREGUNTA ANTERIOR.</label><br><br>
-                         <a class="waves-effect waves-light btn" (click)="registrardatos()">Registrar</a><br><br>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </li>
-             <li>
-               <div class="collapsible-header valign-wrapper" id="divheader3"><i class="material-icons">mode_edit</i> Examen.</div>
-               <div class="row" >
-                  <ng-template #viewContainerRef></ng-template>
-               </div>
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header valign-wrapper" id="divheader1"><i class="material-icons">account_circle</i>Introduce tus datos.</div>
+      <div class="row" *ngIf="mostrarexamenes == false">
+        <div class="row">
+          <div class="col s12">
+            <div class="col s8" id="cambiodetamanio">
+              <form class="form" role="form" *ngIf="!mostrarexamenes"><br>
+                <div class="input-field col s12">
+                  <input placeholder="" maxlength="18" id="curp" name="curp" type="text" class="form-control" [(ngModel)]="persona.curp" (change)="verificarCURP()" style="text-transform:uppercase;">
+                  <label class="atributoscuestionario" for="curp">CURP (*)</label>
+                  <span *ngIf="advertenciaCURP" class="helper-text" data-error="wrong" data-success="right">Favor de introducir una CURP Correcta</span>
+                </div>
+                <div class="input-field col s12">
+                  <input placeholder="" id="nombre" name="nombre" type="text" class="form-control" [(ngModel)]="persona.nombre">
+                  <label class="atributoscuestionario" for="nombre">Nombre completo (*)</label>
+                </div>
+                <div class="input-field col s12">
+                  <input placeholder="" id="apellidopaterno" name="apellidopaterno" type="text" class="form-control" [(ngModel)]="persona.primer_apellido">
+                  <label class="atributoscuestionario" for="apellidopaterno">Primer Apellido (*)</label>
+                </div>
+                <div class="input-field col s12">
+                  <input placeholder="" id="apellidomaterno" name="apellidomaterno" type="text" class="form-control" [(ngModel)]="persona.segundo_apellido">
+                  <label class="atributoscuestionario" for="apellidomaterno">Segundo Apellido </label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="" id="correo" name="correo" type="text" class="form-control" [(ngModel)]="persona.correo">
+                  <label class="atributoscuestionario" for="correo">Correo </label>
+                </div>
+                <div class="input-field col s6">
+                  <input placeholder="" id="telefono" name="telefono" type="text" class="form-control" [(ngModel)]="persona.telefono">
+                  <label class="atributoscuestionario" for="telefono">Telefono </label>
+                </div>
+              </form>
+            </div>
+            <div class="col s4" *ngIf="!mostrarexamenes" id="cambiodetamanio2">
+              <div id="app">
+                <label class="atributoscuestionario">Foto.</label> <br>
+                <div><br>
+                  <video class="responsive-video" #video id="video" width="320" height="240" autoplay></video>
+                </div>
+                <div>
+                  <a class="red lighten-2 btn" id="snap" (click)="capture()">Tomar foto</a>
+                </div>
+                <canvas #canvas id="canvas" width="640" height="480"></canvas>
+                <ul>
+                  <li>
+                    <img src="{{ this.captures[0] }}" height="100" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col s12 center-align" *ngIf="mostrartBtnSelTest">
+          <a class="waves-effect waves-light btn" (click)="beforemostrarexamenes()">Continuar con la seleccion de examen</a>
+        </div>
+        <div>
+          <ul>
+            <li *ngFor="let imagen of imagenes | async">
+              {{imagen.nombre}}
             </li>
           </ul>
         </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header valign-wrapper" id="divheader2"><i class="material-icons">format_list_bulleted</i> Selecciona el tipo de examen.</div>
+      <div class="row" *ngIf="mostrarexamenes && mostrartest == false">
+        <div class="col s12"><br>
+          <div class="row">
+            <div class="col s8 offset-s2 center">
+              <div class="row">
+                <p-carousel numVisible="1" [value]="examenes">
+                  <ng-template let-examen pTemplate="item">
+                    <div class="ui-grid ui-grid-responsive">
+                      <div class="ui-grid-row"><br>
+                        <div class="ui-grid-col-12"><br><label class="nombresExamenes">{{examen.nombre}}</label><br></div><br>
+                      </div>
+                      <div class="ui-grid-row"><br>
+                        <div class="ui-grid-col-12"><br><label class="descripcionExamen">{{examen.descripcion}}</label><br></div><br>
+                      </div>
+                      <div class="ui-grid-row"><br>
+                        <div class="ui-grid-col-12"><br><label class="descripcionExamen">Preguntas: {{examen.total_preguntas}}</label><br></div><br>
+                      </div>
+                      <div class="ui-grid-row">
+                        <div class="ui-grid-col-12"><br><br>
+                          <a class="waves-effect waves-light btn" (click)="seleccionarExamen(examen)">Seleccionar Examen</a><br><br>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+              <div class="row" *ngIf="mostrarexamenes && mostrarbotonrealizarexamen"><br>
+                <div class="ui-grid-col-12"><br><label class="descripcionExamen"> Examen Seleccionado: {{this.configuracionExamen.nombre}} </label><br></div>
+              </div>
+              <div class="row" *ngIf="mostrarexamenes && mostrarbotonrealizarexamen"><br>
+                <div class="center">
+                  <label class="advertencia">RECUERDE QUE SOLO TIENE {{this.configuracionExamen.tiempo_limite}} MINUTOS PARA HACER EL EXAMEN, LAS PREGUNTAS SERAN CONTESTADAS DE FORMA CONTINUA.</label><br><br>
+                  <a class="waves-effect waves-light btn" (click)="registrardatos()">Realizar Examen </a><br><br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header valign-wrapper" id="divheader3"><i class="material-icons">mode_edit</i> Examen.</div>
+      <div class="row" >
+        <ng-template #viewContainerRef></ng-template>
+      </div>
+    </li>
+  </ul>
+</div>

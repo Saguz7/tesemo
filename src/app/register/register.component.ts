@@ -17,7 +17,6 @@
   import * as M from '../graphql/mutations';
   import {User} from "../core/models/user.model";
   import {StorageService} from "../core/services/storage.service";
-  import { FileUploadService } from '../core/file-upload.service';
 
   const feedQuery = gql`
   query listExams{
@@ -44,6 +43,7 @@ export class RegisterComponent implements OnInit {
   selecetdFile : File;
   imagePreview: string;
   personaVO: any;
+  variable: boolean = false;
   persona: any;
   imagenes: Observable<any>;
   imagenesAux: Observable<any>;
@@ -89,23 +89,58 @@ export class RegisterComponent implements OnInit {
   @ViewChild('viewContainerRef', { read: ViewContainerRef })  VCR: ViewContainerRef;
   index: number = 0;
   componentsReferences = [];
+  array: any;
+    cars: any[];
+
+    images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   constructor(
     private CFR: ComponentFactoryResolver,
     private apollo?: Apollo,
     private _route?: ActivatedRoute,
     private _router?: Router,
-    private storageService?: StorageService,
-    private fileUploadService?: FileUploadService
-   ) {
+    private storageService?: StorageService
+    ) {
     this.captures = [];
    }
 
   ngOnInit() {
+
+    this.array = [
+      {nombre:"Examen Licencia Tipo A"},
+      {nombre:"Examen Licencia Tipo B"},
+      {nombre:"Examen Licencia Tipo C"}
+    ];
     document.getElementById("divheader1").style.backgroundColor ="white";
+    $('.carousel.carousel-slider').carousel({
+          fullWidth: true,
+          indicators: false
+       });
 
+       $('.moveNextCarousel').click(function(e){
+     e.preventDefault();
+     e.stopPropagation();
+     $('.carousel').carousel('next');
+  });
+
+  // move prev carousel
+  $('.movePrevCarousel').click(function(e){
+     e.preventDefault();
+     e.stopPropagation();
+     $('.carousel').carousel('prev');
+  });
     this.user = this.storageService.getCurrentUser();
-
+    this.cars = [
+                {vin: 'r3278r2', year: 2010, brand: 'Audi', color: 'Black'},
+                {vin: 'jhto2g2', year: 2015, brand: 'BMW', color: 'White'},
+                {vin: 'h453w54', year: 2012, brand: 'Honda', color: 'Blue'},
+                {vin: 'g43gwwg', year: 1998, brand: 'Renault', color: 'White'},
+                {vin: 'gf45wg5', year: 2011, brand: 'VW', color: 'Red'},
+                {vin: 'bhv5y5w', year: 2015, brand: 'Jaguar', color: 'Blue'},
+                {vin: 'ybw5fsd', year: 2012, brand: 'Ford', color: 'Yellow'},
+                {vin: '45665e5', year: 2011, brand: 'Mercedes', color: 'Brown'},
+                {vin: 'he6sb5v', year: 2015, brand: 'Ford', color: 'Black'}
+            ];
 
     this.examenes = [
       {nombre:"Examen Licencia Tipo A",descripcion:"Examen de ejemplo",total_preguntas:"4",calificacion_minima:1,tiempo_limite:3},
@@ -115,10 +150,14 @@ export class RegisterComponent implements OnInit {
     this.persona = new PersonaVO();
     this.nombre = "Ejemplo";
     this.descripcion = "Ejemplo";
-    this.persona.nombre = '';
-    this.persona.primer_apellido = '';
-    this.persona.segundo_apellido = '';
-    this.persona.curp = '';
+    this.persona.nombre = 'CESAR';
+    this.persona.primer_apellido = 'SANTIAGO';
+    this.persona.segundo_apellido = 'GUZMAN';
+     this.persona.curp = "SAGC940106HOCNZS00";
+     this.persona.correo = 'cesarsantiagoguzman@gmail.com';
+     this.persona.telefono = '9515932305';
+
+
     $(document).ready(function(){
       $('.collapsible').collapsible();
     });
@@ -244,11 +283,17 @@ export class RegisterComponent implements OnInit {
 }
 
    mostrarboton(){
+     /*
      if((this.banderacurpcorrecta == true) && (this.tomarfoto == true)){
        this.mostrartBtnSelTest = true;
      }else{
        this.mostrartBtnSelTest = false;
      }
+
+     */
+
+     this.mostrartBtnSelTest = true;
+
     }
 
 
@@ -287,12 +332,50 @@ export class RegisterComponent implements OnInit {
   }
 
   beforemostrarexamenes(){
+
     this.mostrartBtnSelTest = false;
 
     this.mostrarexamenes = true;
-
+    this.vercarousel();
     this.traerexamenes();
   }
+
+
+      vercarousel(){
+        this.variable = true;
+
+
+  $(function(){ $('.carousel.carousel-slider').carousel({full_width: true,indicators: true}); });
+
+  this.pintarIndicadores();
+
+      }
+
+      pintarIndicadores(){
+        var indicatorActive;
+        var indicator;
+        var delayInMilliseconds = 100; //1 second
+          setTimeout(function(
+          ) {
+            indicatorActive =  ( document.getElementsByClassName("indicator-item active"));
+            indicator  =  ( document.getElementsByClassName("indicator-item"));
+
+            for(var i=0;i< indicatorActive.length;i++){
+              console.log(indicatorActive[i]);
+              indicatorActive[i].style.backgroundColor = "000";
+            }
+
+            for(var i=0;i< indicator.length;i++){
+              console.log(indicator[i]);
+              indicator[i].style.backgroundColor = "000";
+
+            }
+
+          }, delayInMilliseconds);
+
+
+      }
+
 
   aftermostrarexamenes(){
     this.mostrarexamenes = false;
@@ -336,6 +419,7 @@ this.http.post(‘yourdomain.com/file-upload’, this.selectedFile)
 
    //Seleccion de examen
    seleccionarExamen(exsel: any){
+     console.log(exsel);
       this.configuracionExamen = exsel;
       this.mostrarbotonrealizarexamen = true;
       this.examenContestadoalmomento = new ExamenContestadoVO();

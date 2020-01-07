@@ -44,9 +44,9 @@ export class TestComponent implements OnInit {
 
   curp: string;
   id: number;
+  tiempo: any;
 
-
-/////////////////////// Creacion de variables para la creacion de Examen
+ /////////////////////// Creacion de variables para la creacion de Examen
   examen: ExamenVO;
   preguntas: PreguntaVO[];
   respuestas1: RespuestaVO[];
@@ -310,18 +310,24 @@ pregunta3.respuestas = this.respuestas3;
 
     var porcentaje = contadordebuenas * 10 / this.examen.total_preguntas;
 
+    Math.round(porcentaje);
 
+    porcentaje =Math.round(porcentaje);
+
+    console.log(porcentaje);
+    this.tiempo = this.minutos + ":" + this.segundos;
 
     if(porcentaje>=this.examen.calificacion_minima){
-      this.mensaje = "Aprobado Tiempo: " + this.minutos + ":" + this.segundos + "  Porcentaje->" + porcentaje ;
-      this.siaprobo = true;
+      this.mensaje = "Aprobado";
+       this.siaprobo = true;
     }else{
-      this.mensaje = "No aprobado Tiempo " + this.minutos + ":" + this.segundos + "  Porcentaje->" + porcentaje;
+      this.mensaje = "No Aprobado";
       this.siaprobo = false;
     }
 
     this.quitarpararesultados = false;
 
+    this.stopTerminoElExamen();
   }
 
 // Inicio de cronometro, en este mismo se va a cambiar el this.minutos == 1 por la constante del examen this.examen.tiempolimite = "1";
@@ -394,6 +400,18 @@ pregunta3.respuestas = this.respuestas3;
   }
 
 
+  stopTerminoElExamen(){
+       clearInterval(this.contador);
+      this.hora = this.hora;
+      this.minutos = this.minutos;
+      this.segundos = 0;
+      this.contador = null;
+
+
+
+  }
+
+
   guardarsinterminarexamen(){
 
     var contadordebuenas = 0;
@@ -408,9 +426,9 @@ pregunta3.respuestas = this.respuestas3;
    }
 
    if(this.examen.calificacion_minima<=contadordebuenas){
-     this.mensaje = "Aprobado Tiempo: " + this.minutos + ":" + this.segundos;
+     this.mensaje = "Aprobado";
    }else{
-     this.mensaje = "No aprobado Tiempo " + this.minutos + ":" + this.segundos;
+     this.mensaje = "No Aprobado";
    }
 
     for(var i = 0; i < this.examen.total_preguntas; i++) {

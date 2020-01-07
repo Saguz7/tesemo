@@ -1,24 +1,19 @@
 import { NgModule } from '@angular/core';
 import {StorageService} from "./services/storage.service";
 import { UserService } from './user.service';
-import { RepoService } from './repo.service';
-import { BookService } from './book.service';
-import { FileUploadService } from './file-upload.service';
-import { CommentService } from './comment.service';
 import { AuthService } from './auth.service';
 import { SubscriptionService } from './subscription.service';
-import { AdService } from './ad.service';
+import {AuthorizatedAfterLoginGuard} from "./guards/authorizatedafterlogin.guard";
+import {AuthorizatedGuard} from "./guards/authorizated.guard";
+
 @NgModule({
   providers: [
     UserService,
-    RepoService,
-    BookService,
-    FileUploadService,
-    CommentService,
     AuthService,
     SubscriptionService,
-    AdService,
-    StorageService
+    StorageService,
+    AuthorizatedAfterLoginGuard,
+    AuthorizatedGuard
   ]
 })
 export class CoreModule {}

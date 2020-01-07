@@ -1,8 +1,16 @@
+#cantidadrespuestas{
+  text-align:center;
+}
+
+.descripcionDatos{
+  color: #8D3B88;
+  }
+
 #btncerrar{
   background-color: #e57373 ;
   color: #000000;
   font-family: fuenteparatitulos;
-  width: 300px;
+  width: 150px;
 }
 #btnaceptar{
   background-color: #00695c;

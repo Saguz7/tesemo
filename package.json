@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@types/jquery": "^3.3.30",
+    "angular-ui-carousel": "^0.1.10",
     "apollo-angular": "^1.1.2",
     "apollo-angular-link-http": "^1.1.1",
     "apollo-cache-inmemory": "^1.2.5",
@@ -43,6 +44,7 @@
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.1",
     "subscriptions-transport-ws": "^0.9.14",
+    "ui-carousel": "^0.2.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

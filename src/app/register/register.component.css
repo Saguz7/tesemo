@@ -1,3 +1,50 @@
+/* just for jsfiddle */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal !important;
+  font-weight: 400 !important;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v18/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons' !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  word-wrap: normal !important;
+  direction: ltr !important;
+  -moz-font-feature-settings: 'liga' !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+.middle-indicator{
+   position:absolute !important;
+   top:50% !important;
+   }
+  .middle-indicator-text{
+   font-size: 4.2rem !important;
+  }
+  a.middle-indicator-text{
+    color:white !important;
+  }
+.content-indicator{
+    width: 64px !important;
+    height: 64px !important;
+    background: none !important;
+    -moz-border-radius: 50px !important;
+    -webkit-border-radius: 50px !important;
+    border-radius: 50px !important;
+  }
+    .indicators{
+  	visibility: hidden;
+  }
+
+
 body {
     background-color: #f1f1f1;
 }
@@ -22,6 +69,18 @@ label {
   font-size: 24px;
   color: #000000;
 
+  }
+
+  .nombresExamenes{
+    font-size: 26px;
+    color: #000000;
+    font-weight: bold;
+
+  }
+
+  .descripcionExamen{
+    font-size: 18px;
+    color: #000000;
   }
 
 

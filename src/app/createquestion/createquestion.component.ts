@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
- import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {Examen} from '../models/vo/Examen';
- import {Apollo} from 'apollo-angular';
+import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {RespuestaVO} from '../models/vo/RespuestaVO';
 import {TipoLicencia} from '../models/vo/Tipo_Licencia';
 import {Categoria} from '../models/vo/Categoria';
- import {PreguntaVO} from '../models/vo/PreguntaVO';
+import {PreguntaVO} from '../models/vo/PreguntaVO';
 import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
-
+import * as N from '../graphql/mutations';
 declare var M: any;
- const FeedQuery = gql`
+const FeedQuery = gql`
 query listExams{
   examenes{
     id,nombre,descripcion,total_preguntas,calificacion_minima,tiempo_limite,estatus,createdAt
@@ -44,7 +44,8 @@ export class CreateQuestionComponent implements OnInit {
   arraylicenciasboolean = new Array();
   arraylicenciasparaenviar = new Array();
   arraylicenciasparaenviaraux = new Array();
-  file;
+  file: any;
+  pdfSrc: any;
 
 ////////////////////////////////////
 
@@ -72,6 +73,7 @@ export class CreateQuestionComponent implements OnInit {
   vercrearpreguntas:boolean = false;
   vercrearexamen:boolean = false;
   postcreacionrespuestas:boolean = false;
+  arrayImagen: any;
 
   constructor(
      private apollo?: Apollo,
@@ -80,17 +82,13 @@ export class CreateQuestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-
-        $(document).ready(function(){
-          $('.tooltipped').tooltip();
-        });
-
-
+    this.arrayImagen = [];
+    $(document).ready(function(){
+      $('.tooltipped').tooltip();
+    });
     $(document).ready(function(){
       $('.tabs').tabs();
     });
-
     $(document).ready(function(){
       $('.modal').modal();
     });
@@ -103,7 +101,6 @@ export class CreateQuestionComponent implements OnInit {
    }
 
    seleccionarlicenciasparaenviar(id: number){
-     console.log(id);
      if(this.arraylicenciasboolean[id]){
        this.arraylicenciasboolean[id] = false;
      }else{
@@ -121,7 +118,6 @@ export class CreateQuestionComponent implements OnInit {
      for(var i = 0; i < this.arraylicencias.length; i++){
       this.arraylicenciasboolean.push(false);
      }
-
   }
 
   pregenerales(){
@@ -240,15 +236,11 @@ export class CreateQuestionComponent implements OnInit {
         this.crearexamen(result.data)
       });
   }
- 
+
 
   seleccategoriaevent(id: number){
-    console.log("Elegir categoria"+id);
      this.arraycategoriaslibresparamostrar.push(this.arraycategoriaslibres[id]);
      this.arraycategoriaslibres.splice(id, 1);
-
-    console.log(this.arraycategoriaslibresparamostrar);
-    console.log(this.arraycategoriaslibres);
 
   }
 
@@ -259,23 +251,13 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   mensajedeerror(licencia: any,event: any){
-     console.log("mensaje de error");
-     console.log(licencia);
-     console.log(event.target.value);
-     licencia.cantidadpreguntas = event.target.value;
-     console.log(this.arraycategoriaslibresparamostrar);
-      this.cambiarmensadedeerror();
-
-   }
+    licencia.cantidadpreguntas = event.target.value;
+    this.cambiarmensadedeerror();
+  }
 
    cambiarmensadedeerror(){
      var contador = 0;
 
-     for(var i = 0; i < this.arraycategoriaslibresparamostrar.length;i++){
-       console.log(Number(this.arraycategoriaslibresparamostrar[i].cantidadpreguntas))
-         contador = contador + Number(this.arraycategoriaslibresparamostrar[i].cantidadpreguntas);
-         console.log(contador);
-     }
      if((this.examen.total_preguntas - contador)> 0){
        this.vercrearexamen = false;
        this.mensajedeprecaucion = "Le faltan " + (this.examen.total_preguntas - contador) + " preguntas para asignar.";
@@ -298,17 +280,8 @@ export class CreateQuestionComponent implements OnInit {
    }
 
    crearexamenenviarobj(){
-
-      this.pregunta.respuestas = this.preguntasacrear;
-
-
-     console.log(this.preguntasacrear);
-     console.log(this.pregunta);
-
-     console.log(this.file);
-
-
-   }
+     this.pregunta.respuestas = this.preguntasacrear;
+    }
 
    asignartrue(pregunta: any){
      for(var i = 0; i < this.preguntasacrear.length;i++){
@@ -321,5 +294,36 @@ export class CreateQuestionComponent implements OnInit {
 
   enviar(){
   }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+     console.log(file);
+     this.file = file;
+     console.log(this.file);
+
+
+    }
+
+    enviararchivos(){
+
+       if(this.file  != null){
+          this.apollo
+          .mutate({
+            mutation: N.SINGLE_UPLOAD,
+            variables: {
+              rfc: 'Hola'
+            }
+          }).subscribe(
+            data => {
+              this.agregarIDDocumentos(data,0);
+             },
+            err => console.log("Error al guardar el archivo.")
+          );
+       }
+    }
+
+    agregarIDDocumentos(data: any, i : any){
+
+    }
 
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import { Observable } from 'rxjs';
-
 import 'rxjs/add/operator/map';
 import * as Q from '../graphql/queries';
 

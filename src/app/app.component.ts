@@ -4,7 +4,6 @@ import { ApolloQueryResult } from 'apollo-client';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/core/user.service';
-//import { test2 } from './js/collapsable';
 import {StorageService} from "./core/services/storage.service";
 import {User} from "./core/models/user.model";
 declare var M: any;
@@ -19,9 +18,7 @@ export class AppComponent  implements OnInit  {
    loged: boolean = false;
   public user: User;
 
-  constructor(private storageService: StorageService) {
-
-   }
+  constructor(private storageService: StorageService) {}
 
      ngOnInit() {
         this.user = this.storageService.getCurrentUser();

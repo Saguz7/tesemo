@@ -1,33 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { RepositoryListComponent } from './repositories/repository-list/repository-list.component';
-import { FollowersComponent } from './followers/followers.component';
-import { RepositoryComponent } from './repositories/repository/repository.component';
-import { UploadComponent } from './upload/upload.component';
-import { SubscriptionComponent } from './subscription/subscription.component';
-import { AdComponent } from './ad/ad.component';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './resetpassword/resetpassword.component';
 import { MantenimientoexamenComponent } from './mantenimientoexamen/mantenimientoexamen.component';
 import { RegisterComponent } from './register/register.component';
-
+import {AuthorizatedAfterLoginGuard} from "./core/guards/authorizatedafterlogin.guard";
+import {AuthorizatedGuard} from "./core/guards/authorizated.guard";
 const routes: Routes = [
-  { path: 'upload', component: UploadComponent },
-  { path: 'login', component: LoginComponent,  pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [ AuthorizatedAfterLoginGuard ]},
   { path: 'mantenimientotest', component: MantenimientoexamenComponent,  pathMatch: 'full' },
   { path: 'examen', component: RegisterComponent,  pathMatch: 'full' },
+  { path: 'resetpassword', component: ResetPasswordComponent, canActivate: [ AuthorizatedGuard ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login'}
-
-
 ];
-
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      // enableTracing: true
-    })
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

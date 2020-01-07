@@ -1,4 +1,37 @@
+.titulocolor{
+  color: #8D3B88;
+  font-size: 24px;
 
+}
+
+#aftermensaje{
+padding-top: 8px;
+}
+
+.datos{
+  color: #000000;
+  font-size: 24px;
+
+}
+
+.sizeminutos{
+  color: #000000;
+  font-size: 34px;
+}
+
+.nombreAplicado{
+  color: #553276;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.redTitulo{
+  color: #C4131B;
+  font-size: 30px;
+  font-weight: bold;
+
+
+}
 body {
     background-color: #f1f1f1;
 }

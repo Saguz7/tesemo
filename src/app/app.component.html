@@ -1,56 +1,48 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <nav id="navesconder">
-    <div class="nav-wrapper">
-      <div class="row">
-        <a href="#" data-target="slide-out" class="sidenav-trigger"  ><i class="material-icons">menu</i></a>
-        <a><img class="responsive-img" id="logosemovi" src="./assets/CONSULTALOGEADO.svg" ></a>
-         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a class="dropdown-trigger" data-target="dropdown1">
-              <label class="nombreusuario" *ngIf="loged">{{user.nombre}} {{user.primer_apellido}} {{user.segundo_apellido}}</label>
-              <i class="material-icons right">arrow_drop_down</i>
-            </a>
-          </li>
-        </ul>
-      </div>
+<nav id="navesconder">
+  <div class="nav-wrapper">
+    <div class="row">
+      <a href="#" data-target="slide-out" class="sidenav-trigger"  ><i class="material-icons">menu</i></a>
+      <a><img class="responsive-img" id="logosemovi" src="./assets/CONSULTALOGEADO.svg" ></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li ><a href="/examen">Examen </a></li>
+        <li ><a href="/mantenimientotest">Configuración</a></li>
+        <li>
+          <a class="dropdown-trigger" data-target="dropdown1">
+            <label class="nombreusuario" *ngIf="loged">{{user.nombre}} {{user.primer_apellido}} {{user.segundo_apellido}}</label>
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+        </li>
+      </ul>
     </div>
-  </nav>
-  <ul id="slide-out" class="sidenav">
-      <li>
-        <div class="user-view">
-          <a href="#email"><span class="white-text email"><label class="nombreusuario" *ngIf="loged">{{user.nombre}} {{user.primer_apellido}} {{user.segundo_apellido}}</label></span></a>
-        </div>
-      </li>
-      <li>
-        <div class="divider"></div>
-      </li>
-      <li>
-        <a href="/resetpassword" class="waves-effect"><i class="material-icons left">compare_arrows</i> Cambiar contraseña</a>
-      </li>
-      <li>
-        <a class="waves-effect" (click)="logout()"><i class="material-icons left">exit_to_app</i>Cerrar sesión</a>
-      </li>
-  </ul>
-  <ul id="dropdown1" class="dropdown-content">
-      <li>
-        <div class="divider"></div>
-      </li>
-      <li>
-        <a href="/resetpassword"><i class="material-icons left">compare_arrows</i><label *ngIf="loged" class="nombreusuario">Cambiar contraseña</label></a>
-      </li>
-      <li>
-        <a (click)="logout()"><i class="material-icons left">exit_to_app</i><label *ngIf="loged" class="nombreusuario">Cerrar sesión</label></a>
-      </li>
-  </ul>
-
-
-
-
-  <!-- <div *ngIf="!!user"> -->
-  <router-outlet></router-outlet>
-  <!-- </div> -->
-  <br>
-  <br>
-  <br>
-  <br>
- 
+  </div>
+</nav>
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <a href="#email"><span class="white-text email"><label class="nombreusuario" *ngIf="loged">{{user.nombre}} {{user.primer_apellido}} {{user.segundo_apellido}}</label></span></a>
+    </div>
+  </li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a href="/resetpassword" class="waves-effect"><i class="material-icons left">compare_arrows</i> Cambiar contraseña</a>
+  </li>
+  <li>
+    <a class="waves-effect" (click)="logout()"><i class="material-icons left">exit_to_app</i>Cerrar sesión</a>
+  </li>
+</ul>
+<ul id="dropdown1" class="dropdown-content">
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a href="/resetpassword"><i class="material-icons left">compare_arrows</i><label *ngIf="loged" class="nombreusuario">Cambiar contraseña</label></a>
+  </li>
+  <li>
+    <a (click)="logout()"><i class="material-icons left">exit_to_app</i><label *ngIf="loged" class="nombreusuario">Cerrar sesión</label></a>
+  </li>
+</ul>
+<router-outlet></router-outlet>
+<br><br><br><br>

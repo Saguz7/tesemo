@@ -5,6 +5,8 @@ export class PersonaVO {
     segundo_apellido: string;
     curp: string;
     ruta: string;
+    correo: string;
+    telefono: string;
 
     constructor(
         idProveedor?: number,
@@ -12,6 +14,8 @@ export class PersonaVO {
         primer_apellido?: string,
         segundo_apellido?: string,
         curp?: string,
-        ruta?: string
+        ruta?: string,
+        correo?: string,
+        telefono?: string
     ) {}
 }

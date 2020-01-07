@@ -1,17 +1,17 @@
 <div class="row"><br><br>
   <div class="col s11 offset-s1">
     <div class="row">
-      <div class="col s11">
-        <i class="material-icons">filter_2</i>
+      <div class="col s11 valign-wrapper">
+        <i class="material-icons">add</i>
         <label class="atributoscuestionario">
-          Crear pregunta.
+           &nbsp; &nbsp; Crear pregunta.
         </label>
       </div>
     </div>
     <div class="row">
       <div class="col s11">
         <div>
-          <label for="descripcion">Descripcion de la pregunta </label>
+          <label class="descripcionDatos" for="descripcion">Descripcion de la pregunta </label>
         </div>
         <div>
           <textarea id="textarea1" class="materialize-textarea" [(ngModel)]="pregunta.descripcion" ></textarea>
@@ -20,19 +20,19 @@
       <div class="col s11">
         <div class="row">
           <div class="col s11">
-            <label for="descripcion">Imagen de la pregunta </label>
+            <label class="descripcionDatos" for="descripcion">Imagen de la pregunta </label>
           </div>
         </div>
         <div class="row">
           <div class="col s10">
-            <app-file-upload></app-file-upload>
+            <input type="file" accept="image/jpeg, image/png"  #imageInput (change)="processFile(imageInput)" id="file">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col s11">
           <div class="col s12">
-            <label for="descripcion">Categoria </label>
+            <label class="descripcionDatos" for="descripcion">Categoria </label>
           </div>
         </div>
         <div class="col s11">
@@ -50,14 +50,14 @@
         <div class="col s10">
           <div class="col s12">
             <div>
-              <label>
+              <label class="descripcionDatos">
                 Respuestas
               </label>
             </div>
           </div>
-          <div class="col s3 offset-s2"> 
+          <div class="col s3">
             <div>
-              <input type="number" numbersOnly [(ngModel)]="numeropreguntas" min="2">
+              <input id="cantidadrespuestas" type="number" numbersOnly [(ngModel)]="numeropreguntas" min="2">
             </div>
           </div><br><br>
           <div class=" col s4 btn" (click)="crearpreguntasfuncion()">
@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      <div class="col s12"><br><br>
+      <div class="col s12"><br>
         <div  class="col s12" *ngFor="let respuesta  of preguntasacrear; let i = index" >
           <div class="col s11">
             <div>
@@ -93,12 +93,13 @@
             </div>
           </div>
         </div>
-        <div class="col s5 offset-s2" id="crearexamenbtn" >
+        <br><br>
+        <div class="col s5 offset-s2" id="crearexamenbtn" ><br>
           <a  *ngIf="pregunta.descripcion != undefined && postcreacionrespuestas" class="waves-effect waves-light btn-small" (click) = "enviar()" >Guardar Pregunta</a>
           <a  *ngIf="pregunta.descripcion == undefined || !postcreacionrespuestas" class="waves-effect waves-light btn-small" (click) = "enviar()" disabled>Guardar Pregunta</a>
         </div>
-        <div class="col s3" id="cambiodetamanio9">
-          <a id="cambiodetamanio26"  class="waves-effect waves-light btn-small modal-close btn">CERRAR</a>
+        <div class="col s2" id="cambiodetamanio9"><br>
+          <a  id="btncerrar" class="btn modal-close waves-effect waves-light">Cancelar</a>
         </div>
       </div><br><br><br>
     </div>
